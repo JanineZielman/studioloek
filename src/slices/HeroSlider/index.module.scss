@@ -1,0 +1,17 @@
+.slider {
+  position: relative;
+
+  .slide {
+    position: relative;
+    width: 100%;
+    height: 100vh; // Full viewport height slider
+
+    .image,
+    .video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+  }
+}
