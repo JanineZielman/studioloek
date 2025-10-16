@@ -1,6 +1,6 @@
 "use client"
-import { FC, useMemo } from "react";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { useMemo } from "react";
+import { PrismicNextImage } from "@prismicio/next";
 import { motion } from "framer-motion";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
