@@ -38,7 +38,7 @@ const HeroSlider: FC<HeroSliderProps> = ({ slice }) => {
 
           return (
             <div key={i} className={styles.slide}>
-              {kind === "video" ? (
+              {kind === "file" ? (
                 <video
                   className={styles.video}
                   src={url}
