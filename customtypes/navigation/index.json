@@ -25,6 +25,24 @@
             }
           }
         }
+      },
+      "footer": {
+        "type": "Group",
+        "config": {
+          "label": "Footer",
+          "repeat": true,
+          "fields": {
+            "column": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Column",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
+              }
+            }
+          }
+        }
       }
     }
   }

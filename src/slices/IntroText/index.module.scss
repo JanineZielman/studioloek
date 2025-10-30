@@ -1,16 +1,25 @@
 .richtext {
   max-width: 900px;
   margin: 0 auto;
-  padding: 100px 14px;
+  padding: 120px 14px;
   font-size: 26px;
   line-height: 1.4;
   position: sticky;
   top: 0;
+  min-height: 100vh;
+  z-index: -1;
+  transition: opacity 0.6s ease-out;
+  opacity: 1;
 }
 
+.fadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
 
 @media only screen and (max-width: 600px) {
-  .richtext{
+  .richtext {
     font-size: 22px;
+    padding: 90px 14px;
   }
 }

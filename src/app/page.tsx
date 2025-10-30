@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 
-import { asText } from "@prismicio/client";
+import { asText, filter } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
@@ -13,6 +13,11 @@ export default async function Home() {
   const home = await client.getByUID("page", "home");
   const projects = await client.getAllByType("project");
   const navigation = await client.getSingle('navigation');
+  const pages = await client.getAllByType('page', {
+    filters: [filter.not("my.page.uid", "home")],
+  })
+
+  console.log(pages)
 
   // <SliceZone> renders the page's slices.
   return (
@@ -21,6 +26,13 @@ export default async function Home() {
           <img className="logo" src="/studio-loek.svg"/>
           <SliceZone slices={home.data.slices} components={components} />
           <ProjectItems items={projects}/>
+          {pages.map((item, i) => {
+            return(
+              <section id={item.uid} key={`section${i}`}>
+                 <SliceZone slices={item.data.slices} components={components} />
+              </section>
+            )
+          })}
         </div>
       </Layout>
     )

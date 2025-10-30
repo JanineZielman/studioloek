@@ -85,6 +85,21 @@ export interface NavigationDocumentDataMenuItem {
 }
 
 /**
+ * Item in *Navigation → Footer*
+ */
+export interface NavigationDocumentDataFooterItem {
+  /**
+   * Column field in *Navigation → Footer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.footer[].column
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  column: prismic.RichTextField;
+}
+
+/**
  * Content for Navigation documents
  */
 interface NavigationDocumentData {
@@ -98,6 +113,17 @@ interface NavigationDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   menu: prismic.GroupField<Simplify<NavigationDocumentDataMenuItem>>;
+
+  /**
+   * Footer field in *Navigation*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.footer[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  footer: prismic.GroupField<Simplify<NavigationDocumentDataFooterItem>>;
 }
 
 /**
@@ -116,7 +142,11 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = HeroSliderSlice | EmbedSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice =
+  | ImageSlice
+  | HeroSliderSlice
+  | EmbedSlice
+  | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -219,6 +249,29 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   preview_image: prismic.ImageField<never>;
+
+  /**
+   * Date field in *Project*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Meegewerkt Aan field in *Project*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: project.meegewerkt_aan
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  meegewerkt_aan: prismic.BooleanField;
 
   /**
    * Slice Zone field in *Project*
@@ -532,6 +585,7 @@ declare module "@prismicio/client" {
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataMenuItem,
+      NavigationDocumentDataFooterItem,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,

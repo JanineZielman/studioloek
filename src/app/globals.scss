@@ -6,6 +6,7 @@ $green: #56AF35;
 $white: #ffffff;
 $black: #000000;
 $pink: #E3A5FF;
+$blue: #1750AC;
 
 @view-transition {
   navigation: auto;
@@ -60,17 +61,28 @@ nav{
   position: fixed;
   z-index: 999;
   background-color: $pink;
-  border-radius: 30px;
-  padding: 10px 20px;
+  border-radius: 25px;
+  padding: 5px 0;
   left: 50%;
   transform: translateX(-50%);
   top: 14px;
   a{
-    margin: 0 36px;
+    margin: 0 24px;
     font-size: 26px;
     text-decoration: none;
     color: $black;
     white-space: nowrap;
+    padding: 5px 20px;
+    border-radius: 25px;
+    &:first-child{
+      margin-left: 5px;
+    }
+    &:last-child{
+      margin-right: 5px;
+    }
+    &.active{
+      background: white;
+    }
   }
 }
 
@@ -107,6 +119,7 @@ nav{
   width: 100%;
   position: relative;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding-bottom: 100vh;
   margin-top: 30vh;
@@ -117,13 +130,13 @@ nav{
 
   .imgContainer {
     height: 100%;
-    width: 25%;
+    width: 27%;
     z-index: 9;
     box-shadow: 0px 0px 20px 1px #00000078;
     transform-origin: center;
-    margin: 0 4vw;
+    margin: 0 2vw;
     background-color: $white;
-    &:nth-child(2n){
+    &:nth-child(2){
       margin-top: -20vh;
     }
     &:nth-child(3n){
@@ -135,10 +148,68 @@ nav{
       object-fit: contain;
       display: block;
     }
+    .title{
+      display: flex;
+      justify-content: space-between;
+    }
+    .year{
+      padding: 10px;
+    }
+    .label{
+      position: absolute;
+      background-color: $blue;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 25px;
+      margin: 10px;
+    }
     h1{
       padding: 0 14px;
       font-weight: 400;
       font-size: 26px;
+    }
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: fit-content;
+  margin: auto;
+  padding: 5px 10px;
+  border-radius: 24px;
+  z-index: 999;
+
+  &.sticky {
+    position: sticky;
+    top: 80px;
+  }
+
+  .filter {
+    margin: 0 20px;
+    font-size: 20px;
+    cursor: pointer;
+
+    &.active {
+      font-weight: 600;
+    }
+  }
+}
+
+
+
+footer{
+  color: white;
+  padding: 24px;
+  .columns{
+    display: flex;
+    width: fit-content;
+    margin: 0 0 0 auto;
+    .column{
+      margin: 0 48px;
+      font-weight: 300;
+      font-size: 20px;
     }
   }
 }
@@ -173,5 +244,13 @@ nav{
   .project-page h1{
     font-size: 48px;
     width: 100%;
+  }
+  .filters.sticky{
+    top: 65px;
+  }
+  footer{
+    .columns{
+      flex-direction: column;
+    }
   }
 }
