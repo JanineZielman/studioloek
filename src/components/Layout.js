@@ -38,6 +38,7 @@ export const Layout = ({ children, nav }) => {
       {children}
 
       <footer id="contact">
+         <img className="footer-logo" src="/blue-logo-studioloek.svg"/>
         <div className="columns">
           {nav.data.footer.map((item, i) => (
             <div className="column" key={`column${i}`}>
