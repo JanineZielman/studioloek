@@ -1,8 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { PrismicRichText } from "@prismicio/react";
 
-export const Layout = ({ children, nav }) => {
+export const Layout = ({ children }) => {
 
 
   return (
