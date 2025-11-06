@@ -22,7 +22,8 @@ export default async function Home() {
         <div className="home">
           <img className="logo" src="/studio-loek.svg"/>
           <SliceZone slices={home.data.slices} components={components} />    
-          <h2>onder constructie</h2>      
+          <h2>onder constructie</h2>  
+              
         </div>
       </Layout>
     )
