@@ -5,13 +5,11 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import {ProjectItems} from "@/components/ProjectItems"
 import {Layout} from "@/components/Layout"
 
 export default async function Home() {
   const client = createClient();
   const home = await client.getByUID("page", "home");
-  const projects = await client.getAllByType("project");
   const navigation = await client.getSingle('navigation');
   const pages = await client.getAllByType('page', {
     filters: [filter.not("my.page.uid", "home")],
@@ -24,15 +22,8 @@ export default async function Home() {
       <Layout nav={navigation}>
         <div className="home">
           <img className="logo" src="/studio-loek.svg"/>
-          <SliceZone slices={home.data.slices} components={components} />
-          <ProjectItems items={projects}/>
-          {pages.map((item, i) => {
-            return(
-              <section id={item.uid} key={`section${i}`}>
-                 <SliceZone slices={item.data.slices} components={components} />
-              </section>
-            )
-          })}
+          <SliceZone slices={home.data.slices} components={components} />    
+          <h2>onder constructie</h2>      
         </div>
       </Layout>
     )
