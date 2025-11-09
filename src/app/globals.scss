@@ -44,7 +44,7 @@ body{
 }
 
 h1, h2{
-  font-family: "articulat-heavy-cf", sans-serif;
+  font-family: "articulat-cf", sans-serif;
 }
 
 @keyframes fadeIn {
@@ -110,7 +110,7 @@ nav{
       position: fixed;
       background-color: $blue;
       color: white;
-      padding: 5px 10px;
+      padding: 0px 10px 5px 10px;
       border-radius: 25px;
       margin: 24px;
       z-index: 999;
@@ -122,8 +122,8 @@ nav{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-weight: 400;
-    font-size: 6vw;
+    font-weight: 500;
+    font-size: 5vw;
     line-height: 1;
     text-align: center;
     padding-bottom: 2vw;
@@ -176,13 +176,13 @@ nav{
       position: absolute;
       background-color: $blue;
       color: white;
-      padding: 5px 10px;
+      padding: 0px 10px 5px 10px;
       border-radius: 25px;
       margin: 10px;
     }
     h1{
       padding: 0 14px;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 26px;
     }
   }

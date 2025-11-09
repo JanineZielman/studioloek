@@ -8,6 +8,18 @@ import { isFilled } from "@prismicio/client";
 
 export type HeroSliderProps = SliceComponentProps<Content.HeroSliderSlice>;
 
+const NextArrow = ({ onClick }: { onClick?: () => void }) => (
+  <div className={styles.nextArrow} onClick={onClick}>
+    <img src="/SVG/right-arrow.svg"/>
+  </div>
+);
+
+const PrevArrow = ({ onClick }: { onClick?: () => void }) => (
+  <div className={styles.prevArrow} onClick={onClick}>
+    <img src="/SVG/left-arrow.svg"/>
+  </div>
+);
+
 const HeroSlider: FC<HeroSliderProps> = ({ slice }) => {
   const slides = slice?.primary.items || [];
 
@@ -19,9 +31,11 @@ const HeroSlider: FC<HeroSliderProps> = ({ slice }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
-    arrows: false,
+    arrows: true,
     fade: true,
     pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (
