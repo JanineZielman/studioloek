@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { PrismicRichText } from "@prismicio/react";
+import Link from "next/link";
 
 export const Layout = ({ children, nav }) => {
   const [hash, setHash] = useState(
@@ -38,7 +39,7 @@ export const Layout = ({ children, nav }) => {
       {children}
 
       <footer id="contact">
-         <img className="footer-logo" src="/blue-logo-studioloek.svg"/>
+        <Link href="/"><img className="footer-logo" src="/blue-logo-studioloek.svg"/></Link>
         <div className="columns">
           {nav.data.footer.map((item, i) => (
             <div className="column" key={`column${i}`}>

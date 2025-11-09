@@ -1,6 +1,5 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 $green: #56AF35;
 $white: #ffffff;
@@ -34,13 +33,18 @@ html,body{
   margin: 0;
   padding: 0;
   background-color: $green;
-  background: linear-gradient(0deg, $green 0%, #ffffff 100%);
+  background: linear-gradient(0deg, $green 0%, #ffffff 80%);
   scroll-behavior: smooth;
+  font-weight: 300;
 }
 
 body{
-  font-family: "Rubik", sans-serif;
+  font-family: "mundial", sans-serif;
   font-optical-sizing: auto;
+}
+
+h1, h2{
+  font-family: "articulat-heavy-cf", sans-serif;
 }
 
 @keyframes fadeIn {
@@ -68,12 +72,13 @@ nav{
   top: 14px;
   a{
     margin: 0 24px;
-    font-size: 26px;
+    font-size: 22px;
     text-decoration: none;
     color: $black;
     white-space: nowrap;
-    padding: 5px 20px;
+    padding: 5px 20px 8px 20px;
     border-radius: 25px;
+    line-height: 1;
     &:first-child{
       margin-left: 5px;
     }
@@ -100,19 +105,31 @@ nav{
   transform: translate(-50%,-50%);
 }
 
-.project-page h1{
-  position: absolute;
-  z-index: 9;
-  color: $white;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-weight: 400;
-  font-size: 6vw;
-  line-height: 1;
-  text-align: center;
-  padding-bottom: 2vw;
+.project-page  {
+    .label{
+      position: fixed;
+      background-color: $blue;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 25px;
+      margin: 24px;
+      z-index: 999;
+    }
+    h1{
+    position: absolute;
+    z-index: 9;
+    color: $white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 400;
+    font-size: 6vw;
+    line-height: 1;
+    text-align: center;
+    padding-bottom: 2vw;
+  }
 }
+
 
 
 .projects {
@@ -134,14 +151,14 @@ nav{
     z-index: 9;
     box-shadow: 0px 0px 20px 1px #00000078;
     transform-origin: center;
-    margin: 0 2vw;
+    margin: 0 2vw 2vw 2vw;
     background-color: $white;
-    &:nth-child(2){
-      margin-top: -20vh;
-    }
-    &:nth-child(3n){
-      margin-top: 20vh;
-    }
+    // &:nth-child(2){
+    //   margin-top: -20vh;
+    // }
+    // &:nth-child(3n){
+    //   margin-top: 20vh;
+    // }
     img {
       width: 100%;
       height: auto;
@@ -177,18 +194,18 @@ nav{
   background-color: white;
   width: fit-content;
   margin: auto;
-  padding: 5px 10px;
+  padding: 2px 10px 5px 10px;
   border-radius: 24px;
   z-index: 999;
 
   &.sticky {
     position: sticky;
-    top: 80px;
+    top: 70px;
   }
 
   .filter {
     margin: 0 20px;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 
     &.active {
@@ -197,6 +214,11 @@ nav{
   }
 }
 
+.empty-hero{
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, $green 0%, rgb(205,232,195)	 100%);
+}
 
 
 footer{
@@ -207,6 +229,9 @@ footer{
   .footer-logo{
     width: 120px;
     height: auto;
+    position: fixed;
+    bottom: 14px;
+    left: 14px;
   }
   .columns{
     display: flex;

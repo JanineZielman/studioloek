@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { motion } from "framer-motion";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -17,10 +17,10 @@ export type ImageProps = SliceComponentProps<Content.ImageSlice>;
  */
 const Image: FC<ImageProps> = ({ slice }) => {
   // Random rotations between -8 and +8 degrees
-  const rotations = useMemo(
-    () => slice.primary.images.map(() => (Math.random() * 10 - 5).toFixed(2)),
-    [slice.primary.images]
-  );
+  // const rotations = useMemo(
+  //   () => slice.primary.images.map(() => (Math.random() * 10 - 5).toFixed(2)),
+  //   [slice.primary.images]
+  // );
 
   // Dynamic width based on number of images
   const count = slice.primary.images.length;
@@ -45,7 +45,7 @@ const Image: FC<ImageProps> = ({ slice }) => {
             key={`img${i}`}
             style={{
               width: imageWidth,
-              rotate: Number(rotations[i]),
+              // rotate: Number(rotations[i]),
             }}
             initial={{
               y: 100,

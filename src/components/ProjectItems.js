@@ -10,10 +10,10 @@ export const ProjectItems = ({ items }) => {
   const [isSticky, setIsSticky] = useState(true);
   const containerRef = useRef(null);
 
-  const rotations = useMemo(
-    () => items.map(() => (Math.random() * 10 - 5).toFixed(2)),
-    [items]
-  );
+  // const rotations = useMemo(
+  //   () => items.map(() => (Math.random() * 10 - 5).toFixed(2)),
+  //   [items]
+  // );
 
   const filteredItems = useMemo(() => {
     const now = new Date();
@@ -65,7 +65,7 @@ export const ProjectItems = ({ items }) => {
           return (
             <motion.div
               key={`img${i}`}
-              style={{ rotate: Number(rotations[i]) }}
+              // style={{ rotate: Number(rotations[i]) }}
               initial={{ y: 100 }}
               whileInView={{
                 y: 0,
