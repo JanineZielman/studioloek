@@ -6,7 +6,7 @@ import { PrismicRichText, SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import {Layout} from "@/components/Layout"
+import { Layout } from "@/components/Layout";
 
 type Params = { uid: string };
 
@@ -14,32 +14,51 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
   const client = createClient();
   const page = await client.getByUID("project", uid).catch(() => notFound());
-  const navigation = await client.getSingle('navigation');
+  const navigation = await client.getSingle("navigation");
 
-  console.log(page.data.slices[0]?.slice_type == 'hero_slider')
+  // Fetch all projects in some order. Adjust field if needed.
+  const allProjects = await client.getAllByType("project", {
+    orderings: [{ field: "my.project.date", direction: "desc" }],
+  });
 
-  // <SliceZone> renders the page's slices.
+  const index = allProjects.findIndex((p) => p.uid === uid);
+
+  // Wrap-around logic
+  const previousProject =
+    allProjects[index - 1] || allProjects[allProjects.length - 1];
+
+  const nextProject =
+    allProjects[index + 1] || allProjects[0];
+
   return (
     <Layout nav={navigation}>
       <div className="project-page">
-        {page.data.meegewerkt_aan && (
-          <div className="label">Meegewerkt Aan</div>
-        )}
-        <PrismicRichText field={page.data.title}/>
-        {page.data.slices[0]?.slice_type != 'hero_slider' &&
-          <div className="empty-hero"></div>
+        {page.data.meegewerkt_aan && <div className="label">Meegewerkt Aan</div>}
+
+        {page.data.slices[0]?.slice_type !== "hero_slider" ? 
+          <div className="empty-hero">
+            <PrismicRichText field={page.data.title} />
+          </div>
+          :
+           <PrismicRichText field={page.data.title} />
         }
+
         <SliceZone slices={page.data.slices} components={components} />
+
+        <div className="project-nav">
+          <a href={`/project/${previousProject.uid}`} className="prev">
+            <img src="/SVG/left-arrow.svg"/>
+          </a>
+          <a href={`/project/${nextProject.uid}`} className="next">
+             <img src="/SVG/right-arrow.svg"/>
+          </a>
+        </div>
       </div>
     </Layout>
-  )
+  );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { uid } = await params;
   const client = createClient();
   const page = await client.getByUID("project", uid).catch(() => notFound());
@@ -56,9 +75,6 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const client = createClient();
-
-  // Get all pages from Prismic, except the homepage.
   const pages = await client.getAllByType("project");
-
   return pages.map((page) => ({ uid: page.uid }));
 }

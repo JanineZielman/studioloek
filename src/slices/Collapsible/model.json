@@ -1,0 +1,44 @@
+{
+  "id": "collapsible",
+  "type": "SharedSlice",
+  "name": "Collapsible",
+  "description": "Collapsible",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "collapsible": {
+          "type": "Group",
+          "config": {
+            "label": "Collapsible",
+            "repeat": true,
+            "fields": {
+              "trigger": {
+                "type": "Text",
+                "config": {
+                  "label": "Trigger",
+                  "placeholder": ""
+                }
+              },
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Content",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,hyperlink,list-item,o-list-item,strong,em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

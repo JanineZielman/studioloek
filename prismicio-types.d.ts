@@ -143,6 +143,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | CollapsibleSlice
   | ImageSlice
   | HeroSliderSlice
   | EmbedSlice
@@ -336,6 +337,78 @@ export type AllDocumentTypes =
   | NavigationDocument
   | PageDocument
   | ProjectDocument;
+
+/**
+ * Item in *Collapsible → Default → Primary → Collapsible*
+ */
+export interface CollapsibleSliceDefaultPrimaryCollapsibleItem {
+  /**
+   * Trigger field in *Collapsible → Default → Primary → Collapsible*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collapsible.default.primary.collapsible[].trigger
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  trigger: prismic.KeyTextField;
+
+  /**
+   * Content field in *Collapsible → Default → Primary → Collapsible*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collapsible.default.primary.collapsible[].content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Collapsible → Default → Primary*
+ */
+export interface CollapsibleSliceDefaultPrimary {
+  /**
+   * Collapsible field in *Collapsible → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: collapsible.default.primary.collapsible[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  collapsible: prismic.GroupField<
+    Simplify<CollapsibleSliceDefaultPrimaryCollapsibleItem>
+  >;
+}
+
+/**
+ * Default variation for Collapsible Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CollapsibleSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CollapsibleSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Collapsible*
+ */
+type CollapsibleSliceVariation = CollapsibleSliceDefault;
+
+/**
+ * Collapsible Shared Slice
+ *
+ * - **API ID**: `collapsible`
+ * - **Description**: Collapsible
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CollapsibleSlice = prismic.SharedSlice<
+  "collapsible",
+  CollapsibleSliceVariation
+>;
 
 /**
  * Primary content in *Embed → Default → Primary*
@@ -593,6 +666,11 @@ declare module "@prismicio/client" {
       ProjectDocumentData,
       ProjectDocumentDataSlicesSlice,
       AllDocumentTypes,
+      CollapsibleSlice,
+      CollapsibleSliceDefaultPrimaryCollapsibleItem,
+      CollapsibleSliceDefaultPrimary,
+      CollapsibleSliceVariation,
+      CollapsibleSliceDefault,
       EmbedSlice,
       EmbedSliceDefaultPrimary,
       EmbedSliceVariation,

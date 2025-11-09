@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  collapsible: dynamic(() => import("./Collapsible")),
   embed: dynamic(() => import("./Embed")),
   hero_slider: dynamic(() => import("./HeroSlider")),
   image: dynamic(() => import("./Images")),

@@ -1,0 +1,32 @@
+$green: #56AF35;
+$white: #ffffff;
+$black: #000000;
+$pink: #E3A5FF;
+$blue: #1750AC;
+
+
+.section{
+  padding: 300px 0;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  // background-color: white;
+  background: linear-gradient(0deg, #ffffff00 0%, $pink 30%, $pink 70%, #ffffff00 100%);
+}
+
+.collapsible{
+  max-width: 900px;
+  margin: auto;
+  border-bottom: 1px solid black;
+}
+
+.trigger{
+  padding: 14px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  h2{
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0;
+  }
+}
