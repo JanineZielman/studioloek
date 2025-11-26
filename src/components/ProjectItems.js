@@ -25,23 +25,23 @@ export const ProjectItems = ({ items }) => {
     });
   }, [items, filter]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const topOffset = 80; // same as filters top spacing
-      // Sticky if the container is still visible in viewport
-      if (rect.top <= topOffset && rect.bottom > topOffset) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (!containerRef.current) return;
+  //     const rect = containerRef.current.getBoundingClientRect();
+  //     const topOffset = 80; // same as filters top spacing
+  //     // Sticky if the container is still visible in viewport
+  //     if (rect.top <= topOffset && rect.bottom > topOffset) {
+  //       setIsSticky(true);
+  //     } else {
+  //       setIsSticky(false);
+  //     }
+  //   };
 
-    handleScroll(); // run on mount
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   handleScroll(); // run on mount
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <div ref={containerRef} className="projects-container">
@@ -71,7 +71,7 @@ export const ProjectItems = ({ items }) => {
                 y: 0,
                 transition: { duration: 1, ease: "easeIn" },
               }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.5 }}
               className="imgContainer"
             >
               <Link href={`/project/${item.uid}`}>

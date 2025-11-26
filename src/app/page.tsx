@@ -11,13 +11,13 @@ import {Layout} from "@/components/Layout"
 export default async function Home() {
   const client = createClient();
   const home = await client.getByUID("page", "home");
-  const projects = await client.getAllByType("project");
+  const projects = await client.getAllByType("project", {
+    orderings: {
+			field: 'my.project.date',
+			direction: 'desc',
+		},
+  });
   const navigation = await client.getSingle('navigation');
-  const pages = await client.getAllByType('page', {
-    filters: [filter.not("my.page.uid", "home")],
-  })
-
-  console.log(pages)
 
   // <SliceZone> renders the page's slices.
   return (
@@ -26,13 +26,6 @@ export default async function Home() {
           <img className="logo" src="/studio-loek.svg"/>
           <SliceZone slices={home.data.slices} components={components} />
           <ProjectItems items={projects}/>
-          {pages.map((item, i) => {
-            return(
-              <section id={item.uid} key={`section${i}`}>
-                 <SliceZone slices={item.data.slices} components={components} />
-              </section>
-            )
-          })}
         </div>
       </Layout>
     )

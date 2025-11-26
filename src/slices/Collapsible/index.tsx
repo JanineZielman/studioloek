@@ -12,7 +12,7 @@ const Collapsible: FC<CollapsibleProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={styles.section}
+      className={`${styles.section} collapsible`}
     >
       {slice.primary.collapsible?.map((item, index) => (
         <CollapsibleItem

@@ -30,3 +30,9 @@ $blue: #1750AC;
     margin: 0;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .collapsible{
+    width: 90%;
+  }
+}

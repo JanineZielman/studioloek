@@ -151,7 +151,7 @@ nav{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding-bottom: 100vh;
+  padding-bottom: 10vh;
   margin-top: 30vh;
   a{
     text-decoration: none;
@@ -245,16 +245,16 @@ footer{
   display: flex;
   align-items: center;
   .footer-logo{
-    width: 120px;
+    width: 80px;
     height: auto;
     position: fixed;
     bottom: 14px;
-    left: 14px;
+    right: 14px;
   }
   .columns{
     display: flex;
     width: fit-content;
-    margin: 0 0 0 auto;
+    margin: 0 auto 0 auto;
     .column{
       margin: 0 48px;
       font-weight: 300;

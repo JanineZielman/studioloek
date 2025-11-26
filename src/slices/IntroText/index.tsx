@@ -22,35 +22,70 @@ type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 
 const RichText = ({ slice }: RichTextProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  const el = ref.current;
+  const sentinel = sentinelRef.current;
+  if (!el || !sentinel) return;
 
-    // Find the *next* RichText section in the DOM (not just the next sibling)
-    const allRichTexts = Array.from(document.querySelectorAll("[data-richtext]"));
-    const currentIndex = allRichTexts.indexOf(el);
-    const nextRichText = allRichTexts[currentIndex + 1] as HTMLElement | undefined;
+  const allSlices = Array.from(
+    document.querySelectorAll("[data-richtext], .collapsible")
+  );
 
-    if (!nextRichText) return; // last one stays visible
+  const currentIndex = allSlices.indexOf(el);
+  const nextSlice = allSlices[currentIndex + 1] as HTMLElement | undefined;
+  if (!nextSlice) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setFadeOut(true);
-        } else {
-          setFadeOut(false);
-        }
-      },
-      { threshold: 0.2 }
-    );
+  let hasPassed = false;
 
-    observer.observe(nextRichText);
-    return () => observer.disconnect();
-  }, []);
+  // fade OUT when next slice crosses threshold
+  const nextObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!hasPassed && entry.intersectionRatio > 0.4) {
+        setFadeOut(true);
+      }
+
+      // lock
+      if (entry.boundingClientRect.bottom < 0) {
+        hasPassed = true;
+      }
+    },
+    {
+      threshold: [0.4],
+      rootMargin: "0px 0px -30% 0px",
+    }
+  );
+
+  // fade IN when scrolling up into the sentinel zone (much easier to detect)
+  const sentinelObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!hasPassed && entry.isIntersecting) {
+        setFadeOut(false);
+      }
+    },
+    {
+      rootMargin: "0px 0px -10% 0px", // fade-in earlier
+      threshold: 0,
+    }
+  );
+
+  nextObserver.observe(nextSlice);
+  sentinelObserver.observe(sentinel);
+
+  return () => {
+    nextObserver.disconnect();
+    sentinelObserver.disconnect();
+  };
+}, []);
+
+
 
   return (
+    <>
+    <div ref={sentinelRef} style={{ height: "1px" }} />
     <section
       ref={ref}
       data-richtext
@@ -58,6 +93,7 @@ const RichText = ({ slice }: RichTextProps) => {
     >
       <PrismicRichText field={slice.primary.content} components={components} />
     </section>
+    </>
   );
 };
 
