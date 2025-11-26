@@ -37,7 +37,7 @@ const Image: FC<ImageProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={styles.images}
+      className={`${styles.images} imagesWrapper`}
     >
       <div className={styles.imgWrapper}>
         {slice.primary.images.map((item, i) => (

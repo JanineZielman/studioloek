@@ -10,11 +10,6 @@ export const ProjectItems = ({ items }) => {
   const isSticky = true;
   const containerRef = useRef(null);
 
-  // const rotations = useMemo(
-  //   () => items.map(() => (Math.random() * 10 - 5).toFixed(2)),
-  //   [items]
-  // );
-
   const filteredItems = useMemo(() => {
     const now = new Date();
     return items.filter((item) => {
@@ -25,26 +20,8 @@ export const ProjectItems = ({ items }) => {
     });
   }, [items, filter]);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (!containerRef.current) return;
-  //     const rect = containerRef.current.getBoundingClientRect();
-  //     const topOffset = 80; // same as filters top spacing
-  //     // Sticky if the container is still visible in viewport
-  //     if (rect.top <= topOffset && rect.bottom > topOffset) {
-  //       setIsSticky(true);
-  //     } else {
-  //       setIsSticky(false);
-  //     }
-  //   };
-
-  //   handleScroll(); // run on mount
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-
   return (
-    <div ref={containerRef} className="projects-container">
+    <div ref={containerRef} className="projects-container" id="projecten">
       <div className={`filters ${isSticky ? "sticky" : ""}`}>
         {["all", "upcoming", "past"].map((f) => (
           <div
@@ -65,7 +42,6 @@ export const ProjectItems = ({ items }) => {
           return (
             <motion.div
               key={`img${i}`}
-              // style={{ rotate: Number(rotations[i]) }}
               initial={{ y: 100 }}
               whileInView={{
                 y: 0,

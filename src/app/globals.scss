@@ -33,7 +33,13 @@ html,body{
   margin: 0;
   padding: 0;
   background-color: $green;
-  background: linear-gradient(0deg, $green 0%, #ffffff 80%);
+  // background: linear-gradient(0deg, $green 0%, #ffffff 80%);
+    background: linear-gradient(
+    to bottom,
+    #ffffff 0%,    
+    #ffffff 120vh,  
+    $green 100%  
+  );
   scroll-behavior: smooth;
   font-weight: 300;
 }

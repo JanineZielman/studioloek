@@ -2,52 +2,82 @@
 import { useEffect, useState } from "react";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Next 13 App Router
 
 export const Layout = ({ children, nav }) => {
-  const [hash, setHash] = useState(
-    typeof window !== "undefined" ? window.location.hash : ""
-  );
+const pathname = usePathname();
+const [activeSection, setActiveSection] = useState("");
 
-  // Listen for hash changes
-  useEffect(() => {
-    const handleHashChange = () => {
-      setHash(window.location.hash);
-    };
+// IntersectionObserver for in-page anchors
+useEffect(() => {
+const sections = document.querySelectorAll("[id]");
+if (!sections.length) return;
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
 
-  return (
-    <div className="container">
-      <nav>
-        {nav.data.menu.map((item, i) => {
-          const href = item.link.url?.startsWith("/")
-            ? item.link.url
-            : `/${item.link.url}`;
+const observer = new IntersectionObserver(
+  (entries) => {
+    let found = false;
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActiveSection(entry.target.id);
+        found = true;
+      }
+    });
+    if (!found) setActiveSection("");
+  },
+  {
+    rootMargin: "-40% 0px -40% 0px",
+    threshold: 0,
+  }
+);
 
-          const isActive = hash === `${href.replace("/", "")}`;
+sections.forEach((sec) => observer.observe(sec));
 
-          return (
-            <a href={href} key={`nav${i}`} className={isActive ? "active" : ""}>
-              {item.link.text}
-            </a>
-          );
-        })}
-      </nav>
+return () => observer.disconnect();
 
-      {children}
 
-      <footer id="contact">
-        <div className="columns">
-          {nav.data.footer.map((item, i) => (
-            <div className="column" key={`column${i}`}>
-              <PrismicRichText field={item.column} />
-            </div>
-          ))}
+}, []);
+
+return ( <div className="container"> <nav>
+{nav.data.menu.map((item, i) => {
+const href = item.link.url || "";
+const isAnchor = href.startsWith("#");
+let isActive = false;
+
+
+      if (isAnchor) {
+        const targetId = href.replace("#", "");
+        isActive = activeSection === targetId;
+      } else {
+        // Normal page link → highlight if pathname matches
+        const linkPath = href.startsWith("/") ? href : `/${href}`;
+        isActive = pathname === linkPath;
+      }
+
+      return (
+        <a key={`nav${i}`} href={isAnchor ? `/${href}` : href} className={isActive ? "active" : ""}>
+          {item.link.text}
+        </a>
+      );
+    })}
+  </nav>
+
+  {children}
+
+  <footer id="contact">
+    <div className="columns">
+      {nav.data.footer.map((item, i) => (
+        <div className="column" key={`column${i}`}>
+          <PrismicRichText field={item.column} />
         </div>
-         <Link href="/"><img className="footer-logo" src="/blue-logo-studioloek.svg"/></Link>
-      </footer>
+      ))}
     </div>
-  );
+    <Link href="/">
+      <img className="footer-logo" src="/blue-logo-studioloek.svg" />
+    </Link>
+  </footer>
+</div>
+
+
+);
 };
