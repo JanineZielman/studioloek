@@ -7,8 +7,7 @@ import Link from "next/link";
 
 export const ProjectItems = ({ items }) => {
   const [filter, setFilter] = useState("all");
-  const [isSticky, setIsSticky] = useState(true);
-  setIsSticky(true)
+  const isSticky = true;
   const containerRef = useRef(null);
 
   // const rotations = useMemo(
