@@ -54,7 +54,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           </a>
         </div>
       </div>
-      <iframe src="https://studioloek.cdn.prismic.io/studioloek/aScLXGGnmrmGqWiA_ThesisproposalYmkeMoes_6871631.pdf"/>
     </Layout>
   );
 }
