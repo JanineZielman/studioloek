@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useMemo, useState, useRef } from "react";
 import { PrismicNextImage } from "@prismicio/next";
 import { motion } from "framer-motion";
 import { PrismicRichText } from "@prismicio/react";
@@ -8,6 +8,7 @@ import Link from "next/link";
 export const ProjectItems = ({ items }) => {
   const [filter, setFilter] = useState("all");
   const [isSticky, setIsSticky] = useState(true);
+  setIsSticky(true)
   const containerRef = useRef(null);
 
   // const rotations = useMemo(
