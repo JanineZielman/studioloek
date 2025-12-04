@@ -1,0 +1,91 @@
+.images {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  margin: auto;
+  margin-top: 30vh;
+  // margin-bottom: 30vh;
+  // margin-bottom: -20vh;
+
+  .imgWrapper {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .imgContainer {
+    height: auto;
+    z-index: 9;
+    transform-origin: center;
+    margin: 0 4vw;
+    background-color: white;
+    box-shadow: 0px 0px 20px 1px #00000078;
+
+    .text {
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    p {
+      font-size: 22px;
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      max-height: 80vh;
+    }
+  }
+
+  .link a {
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+
+    &:before {
+      content: '';
+      width: 50px;
+      height: 20px;
+      margin-bottom: -5px;
+      margin-right: 10px;
+      display: inline-block;
+      mask-image: url('/SVG/right-arrow.svg');
+      background-color: black;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .images {
+    margin-top: 0;
+    margin-bottom: 0;
+    height: auto;
+
+    .imgWrapper {
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .imgContainer {
+      width: 90% !important;
+      margin-bottom: 48px;
+
+      &:nth-child(2n) {
+        margin-top: 0;
+      }
+
+      &:nth-child(3n) {
+        margin-top: 0;
+      }
+    }
+  }
+}

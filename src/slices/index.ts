@@ -7,5 +7,6 @@ export const components = {
   embed: dynamic(() => import("./Embed")),
   hero_slider: dynamic(() => import("./HeroSlider")),
   image: dynamic(() => import("./Images")),
+  image_links: dynamic(() => import("./ImageLinks")),
   rich_text: dynamic(() => import("./IntroText")),
 };

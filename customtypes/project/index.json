@@ -52,6 +52,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "collapsible": {
+              "type": "SharedSlice"
+            },
+            "image_links": {
+              "type": "SharedSlice"
+            },
             "image": {
               "type": "SharedSlice"
             },

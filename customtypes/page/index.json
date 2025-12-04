@@ -27,6 +27,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "image_links": {
+              "type": "SharedSlice"
+            },
             "collapsible": {
               "type": "SharedSlice"
             },

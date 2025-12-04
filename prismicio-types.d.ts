@@ -143,6 +143,7 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ImageLinksSlice
   | CollapsibleSlice
   | ImageSlice
   | HeroSliderSlice
@@ -220,6 +221,8 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 type ProjectDocumentDataSlicesSlice =
+  | CollapsibleSlice
+  | ImageLinksSlice
   | ImageSlice
   | EmbedSlice
   | HeroSliderSlice
@@ -590,6 +593,88 @@ type ImageSliceVariation = ImageSliceDefault;
 export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
 
 /**
+ * Item in *ImageLinks → Default → Primary → ImageLinks*
+ */
+export interface ImageLinksSliceDefaultPrimaryImagelinksItem {
+  /**
+   * Image field in *ImageLinks → Default → Primary → ImageLinks*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_links.default.primary.imagelinks[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Text field in *ImageLinks → Default → Primary → ImageLinks*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_links.default.primary.imagelinks[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Link field in *ImageLinks → Default → Primary → ImageLinks*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_links.default.primary.imagelinks[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *ImageLinks → Default → Primary*
+ */
+export interface ImageLinksSliceDefaultPrimary {
+  /**
+   * ImageLinks field in *ImageLinks → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_links.default.primary.imagelinks[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  imagelinks: prismic.GroupField<
+    Simplify<ImageLinksSliceDefaultPrimaryImagelinksItem>
+  >;
+}
+
+/**
+ * Default variation for ImageLinks Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageLinksSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageLinksSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageLinks*
+ */
+type ImageLinksSliceVariation = ImageLinksSliceDefault;
+
+/**
+ * ImageLinks Shared Slice
+ *
+ * - **API ID**: `image_links`
+ * - **Description**: ImageLinks
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageLinksSlice = prismic.SharedSlice<
+  "image_links",
+  ImageLinksSliceVariation
+>;
+
+/**
  * Primary content in *IntroText → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
@@ -685,6 +770,11 @@ declare module "@prismicio/client" {
       ImageSliceDefaultPrimary,
       ImageSliceVariation,
       ImageSliceDefault,
+      ImageLinksSlice,
+      ImageLinksSliceDefaultPrimaryImagelinksItem,
+      ImageLinksSliceDefaultPrimary,
+      ImageLinksSliceVariation,
+      ImageLinksSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
