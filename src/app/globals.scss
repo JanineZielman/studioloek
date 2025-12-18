@@ -50,6 +50,11 @@ body {
   font-optical-sizing: auto;
 }
 
+.page {
+  height: 100%;
+  min-height: 130vh;
+}
+
 h1,
 h2 {
   font-family: "articulat-cf", sans-serif;
@@ -160,7 +165,7 @@ nav {
   margin-top: 100px;
 
   a {
-    width: 100px;
+    width: 70px;
   }
 }
 
@@ -292,6 +297,10 @@ footer {
       font-weight: 300;
       font-size: 20px;
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 

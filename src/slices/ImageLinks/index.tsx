@@ -19,7 +19,7 @@ const ImageLinks: FC<ImageLinksProps> = ({ slice }) => {
   const count = slice.primary.imagelinks.length;
   const imageWidth =
     count <= 1
-      ? "70%"
+      ? "auto"
       : count === 2
         ? "40%"
         : count === 3
